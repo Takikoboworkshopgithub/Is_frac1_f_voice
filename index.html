@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>音声の1/fゆらぎ解析</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🎙️ 1/f ゆらぎ解析 (音量変動)</h1>
+      <p class="desc">
+        アップロードされた音声の音量（RMS）の時系列変動から、パワースペクトルを算出して1/fゆらぎ（α値）を解析します。
+      </p>
+
+      <div class="control-panel">
+        <input type="file" id="audio-file" accept="audio/wav, audio/mpeg" />
+        <button id="analyze-btn" disabled>解析開始</button>
+      </div>
+
+      <div id="loading" class="hidden">
+        <div class="spinner"></div>
+        <p>解析中... しばらくお待ちください。</p>
+      </div>
+
+      <div id="results" class="hidden">
+        <div class="result-card">
+          <h2>解析結果: α = <span id="alpha-value">-</span></h2>
+          <p id="analysis-text" class="analysis-text">-</p>
+        </div>
+
+        <div class="chart-container">
+          <h3>元音声の波形</h3>
+          <canvas id="waveform-canvas" width="800" height="150"></canvas>
+        </div>
+
+        <div class="chart-container">
+          <h3>パワースペクトルと回帰直線 (log-log)</h3>
+          <canvas id="spectrum-chart" width="800" height="400"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
